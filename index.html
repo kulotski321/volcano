@@ -1,2 +1,12 @@
-<h1>Volcano</h1>
+<h1>Volcano Sender</h1>
+
+<textarea id="input" oninput="sendData()"></textarea>
+
 <script src="volcano.js"></script>
+
+<script type="text/javascript">
+	function sendData(){
+		var data = document.getElementById("input").value;
+		volcano.database.ref("users/me").set(data);
+	}
+</script>

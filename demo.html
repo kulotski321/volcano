@@ -1,0 +1,10 @@
+<h1>Volcano Receiver</h1>
+
+<h1 id="output"></h1>
+
+<script src="volcano.js"></script>
+<script type="text/javascript">
+	var data = volcano.database.ref("users/me").on("change", function(){
+		document.getElementById("output").text = data;
+	});
+</script>
