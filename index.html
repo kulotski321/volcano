@@ -2,6 +2,10 @@
 
 <textarea id="input" oninput="sendData()"></textarea>
 
+<pre class="code">
+volcano.database.ref("me/message").set(data);
+</pre>
+
 <script src="volcano.js"></script>
 
 <script type="text/javascript">
@@ -10,3 +14,14 @@
 		volcano.database.ref("me/message").set(data);
 	}
 </script>
+
+<style>
+    body {
+        font-family: monospace;
+    }
+
+    .code {
+        padding: 20px;
+        border: 1px solid #eee;
+    }
+</style>

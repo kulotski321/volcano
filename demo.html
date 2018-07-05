@@ -1,6 +1,12 @@
 <h1>Volcano Receiver</h1>
 
-<h1 id="output"></h1>
+<pre id="output"></pre>
+
+<pre class="code">
+volcano.database.ref('me/message').on('change', value => {
+    output.textContent = value;
+});
+</pre>
 
 <script src="volcano.js"></script>
 <script type="text/javascript">
@@ -12,3 +18,14 @@
         });
     });
 </script>
+
+<style>
+    body {
+        font-family: monospace;
+    }
+
+    .code {
+        padding: 20px;
+        border: 1px solid #eee;
+    }
+</style>
