@@ -59,7 +59,7 @@ var volcano = {
 			return {
 				on: function(name, callback){
 					ws.on('change', function(value){
-						if(value.path == path){
+						if(value.path.startsWith(path)){
 							callback(value.value);
 						}
 					});
