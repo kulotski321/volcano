@@ -69,17 +69,12 @@ var volcano = {
 				}
 			};
 		}
-	},
-
-    ready: function(callback) {
-        this.onReady = callback;
-    },
-
-    onReady: null
+	}
 };
-
-ws.socket.addEventListener("open", function() {
-    if (typeof volcano.onReady === 'function') {
-        volcano.onReady();
-    }
+ws.socket.addEventListener("open", function(){
+	volcano.database.ref("users/me").set("hello world");
+	volcano.database.ref("users").on("change", function(value){
+		console.log(value);
+	});
+	
 });
