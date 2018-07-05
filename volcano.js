@@ -47,25 +47,34 @@ var websockets = (function() {
     return websocketFactory;
 })();
 
-const origin = "volcano-server-bogrpoepof.now.sh";
+const origin = "volcano-server-jdszpmajoj.now.sh";
 const ws = websockets(`wss://${origin}/ws`);
 
 
 var volcano = {
 	database: {
 		ref: function(path){
-			console.log(path);
+			// console.log(path);
 
 			return {
 				on: function(name, callback){
-					console.log(name, callback);
+					ws.on('change', function(value){
+						if(value.path == path){
+							callback(value.value);
+						}
+					});
 				},
 				set: function(value){
-					console.log(value);
+					ws.emit('set', {path, value});
 				}
 			};
 		}
 	}
 };
-
-// volcano.database.ref("/user/name/angelo").set("montil");
+ws.socket.addEventListener("open", function(){
+	volcano.database.ref("users/me").set("hello world");
+	volcano.database.ref("users").on("change", function(value){
+		console.log(value);
+	});
+	
+});
