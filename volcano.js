@@ -52,29 +52,34 @@ const ws = websockets(`wss://${origin}/ws`);
 
 
 var volcano = {
-	database: {
-		ref: function(path){
-			// console.log(path);
+    database: {
+        ref: function(path){
+            // console.log(path);
 
-			return {
-				on: function(name, callback){
-					ws.on('change', function(value){
-						if(value.path.startsWith(path)){
-							callback(value.value);
-						}
-					});
-				},
-				set: function(value){
-					ws.emit('set', {path, value});
-				}
-			};
-		}
-	}
+            return {
+                on: function(name, callback){
+                    ws.on('change', function(value){
+                        if(value.path == path){
+                            callback(value.value);
+                        }
+                    });
+                },
+                set: function(value){
+                    ws.emit('set', {path, value});
+                }
+            };
+        }
+    },
+
+    ready: function(callback) {
+        this.onReady = callback;
+    },
+
+    onReady: null
 };
-ws.socket.addEventListener("open", function(){
-	volcano.database.ref("users/me").set("hello world");
-	volcano.database.ref("users").on("change", function(value){
-		console.log(value);
-	});
-	
+
+ws.socket.addEventListener("open", function() {
+    if (typeof volcano.onReady === 'function') {
+        volcano.onReady();
+    }
 });
