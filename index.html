@@ -7,6 +7,6 @@
 <script type="text/javascript">
 	function sendData(){
 		var data = document.getElementById("input").value;
-		volcano.database.ref("users/me").set(data);
+		volcano.database.ref("me/message").set(data);
 	}
 </script>

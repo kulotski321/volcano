@@ -4,7 +4,11 @@
 
 <script src="volcano.js"></script>
 <script type="text/javascript">
-	var data = volcano.database.ref("users/me").on("change", function(){
-		document.getElementById("output").text = data;
-	});
+    const output = document.querySelector('#output');
+
+    volcano.ready(() => {
+        volcano.database.ref('me/message').on('change', value => {
+            output.textContent = value;
+        });
+    });
 </script>
