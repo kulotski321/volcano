@@ -47,7 +47,7 @@ var websockets = (function() {
     return websocketFactory;
 })();
 
-const origin = "volcano-server-jdszpmajoj.now.sh";
+const origin = "volcano-server-kfeguhmdqw.now.sh";
 const ws = websockets(`wss://${origin}/ws`);
 
 
